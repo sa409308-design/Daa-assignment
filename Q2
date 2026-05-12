@@ -1,0 +1,23 @@
+public class Money {
+
+    public static void main(String[] args) {
+
+        int total = 1988;
+
+        int[] notes = {5000, 1000, 500, 100, 50, 20, 10, 5, 2, 1};
+
+        System.out.println("Breakdown for Rs. " + total + " ");
+
+        for (int i : notes) {
+
+            if (total >= i) {
+
+                int count = total / i;
+
+                total = total % i;
+
+                System.out.println("Rs. " + i + " = " + count);
+            }
+        }
+    }
+}
