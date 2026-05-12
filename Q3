@@ -1,0 +1,53 @@
+import java.util.*;
+
+public class TopologicalSort {
+
+    static class Graph {
+        Map<Character, List<Character>> adj = new HashMap<>();
+
+        void addEdge(char u, char v) {
+            adj.computeIfAbsent(u, k -> new ArrayList<>()).add(v);
+            adj.putIfAbsent(v, new ArrayList<>());
+        }
+
+        void topoSort() {
+            Deque<Character> stack = new ArrayDeque<>();
+            Set<Character> visited = new HashSet<>();
+            List<Character> sortedKeys = new ArrayList<>(adj.keySet());
+            Collections.sort(sortedKeys);
+
+            for (char node : sortedKeys) {
+                if (!visited.contains(node))
+                    dfs(node, visited, stack);
+            }
+
+            System.out.print("Topological Sort Order: ");
+            while (!stack.isEmpty())
+                System.out.print(stack.pop() + " ");
+        }
+
+        void dfs(char u, Set<Character> visited, Deque<Character> stack) {
+            visited.add(u);
+            for (char v : adj.getOrDefault(u, new ArrayList<>())) {
+                if (!visited.contains(v))
+                    dfs(v, visited, stack);
+            }
+            stack.push(u);
+        }
+    }
+
+    public static void main(String[] args) {
+        Graph e = new Graph();
+
+        e.addEdge('m', 'q'); e.addEdge('m', 'r'); e.addEdge('m', 'x');
+        e.addEdge('n', 'q'); e.addEdge('n', 'u'); e.addEdge('n', 'o');
+        e.addEdge('p', 'o'); e.addEdge('p', 's'); e.addEdge('p', 'z');
+        e.addEdge('o', 'r'); e.addEdge('o', 'v');
+        e.addEdge('q', 't'); e.addEdge('r', 'u'); e.addEdge('r', 'y');
+        e.addEdge('s', 'r'); e.addEdge('s', 'v');
+        e.addEdge('u', 't'); e.addEdge('v', 'w'); e.addEdge('v', 'x');
+        e.addEdge('y', 'v'); e.addEdge('w', 'z');
+
+        e.topoSort();
+    }
+}
