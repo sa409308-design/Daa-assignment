@@ -1,0 +1,55 @@
+import java.util.*;
+
+public class GraphRepresentation {
+
+    public static void main(String[] args) {
+
+        int i = 4;
+
+        // Adjacency Matrix
+        int[][] matrix = new int[i][i];
+
+        // all nodes connected
+        for (int j = 0; j < i; j++) {
+            for (int k = 0; k < i; k++) {
+                if (j != k) {
+                    matrix[j][k] = 1;
+                }
+            }
+        }
+
+        System.out.println("Adjency Matrix:");
+        for (int[] row : matrix) {
+            System.out.println(Arrays.toString(row));
+        }
+
+        //Adjacency List
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+
+        for (int j = 0; j < i; j++) {
+            list.add(new ArrayList<>());
+        }
+
+        for (int j = 0; j < i; j++) {
+            for (int k = 0; k < i; k++) {
+                if (j != k) {
+                    list.get(j).add(k);
+                }
+            }
+        }
+
+        System.out.println("\nAdjency List:");
+        for (int j = 0; j < i; j++) {
+            System.out.println(j + " -> " + list.get(j));
+        }
+
+        // Edge List 
+        System.out.println("\nEdge List:");
+
+        for (int j = 0; j < i; j++) {
+            for (int k = j + 1; k < i; k++) {
+                System.out.println(j + " - " + k);
+            }
+        }
+    }
+}
