@@ -1,6 +1,6 @@
 public class LCS {
     public static void main(String[] args) {
-        String s1 = "DONALDTRUMP";
+        String s1 = "SAFEERAHMED";
         String s2 = "ETAOINSHR";
         int i = s1.length();
         int x = s2.length();
